@@ -5,7 +5,8 @@ import Constants from 'expo-constants';
 // You can import from local files
 import AssetExample from './components/AssetExample';
 import Splash from "./components/Splash";
-import Login from "./components/Login"
+import Login from "./components/Login";
+import Signup from "./components/Signup"
 
 // or any pure javascript modules available in npm
 import { Card } from 'react-native-paper';
@@ -15,6 +16,7 @@ export default class App extends React.Component {
     return (
     // <Splash/>
     <Login/>
+    // <Signup/>
     );
   }
 }

@@ -4,9 +4,9 @@ import { Text, View, StyleSheet, ImageBackground , Image  } from 'react-native';
 export default class Splash extends React.Component {
   render() {
     return (
-      <ImageBackground  source = { require("../assets/bgImage2.JPG")} style = {styles.container}>
+      <ImageBackground  source = { require("../assets/bg_signup.jpg")} style = {styles.container}>
       <View style = { styles.icon_container}>
-        <Image source = {require("../assets/FHA_icon.PNG")} ></Image>
+        <Image source = {require("../assets/Logo..png")} ></Image>
         </View>
       </ImageBackground>
      

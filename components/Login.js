@@ -1,108 +1,153 @@
-import React , { Component } from "react";
-import { Text, View, StyleSheet, ImageBackground , Image  , TextInput , Button } from 'react-native';
+import React, { Component } from 'react';
+import {
+  Text,
+  View,
+  StyleSheet,
+  ImageBackground,
+  Image,
+  TextInput,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
+import { AntDesign, Ionicons, Feather } from '@expo/vector-icons';
+const { width: WIDTH } = Dimensions.get('window');
 
-
-export default class Login extends Component {
+export default class Login extends React.Component {
   state = {
+    showPass: true,
+    press: false,
     email:"",
-    password:""
-  }
-  
-  // handleOnChange = ( event ) => {
-  //    this.setState(({
-  //      [event.target.name] : event.target.value
-  //    }))
-  // }
-  
-  onPressLearnMore = () => {
-    console.log("on press ")
+    password:"",
+  };
+  showPassword = () => {
+    const { press } = this.state;
+    press
+      ? this.setState({ showPass: true, press: false })
+      : this.setState({ showPass: false, press: true });
+  };
+
+  handleSubimit = () => {
+    alert(this.state.password)
   }
   render() {
-    const { email , password } = this.state
-    return(
-     <View style = { styles.container}>
-      <View style = { styles.form}>
-         <TextInput
-          placeholder="Email"
-          autoCapitalize="none"
-          style={styles.textInput}
-          onChangeText={email => this.setState({ email })}
-          value={email}
-          name="email"
-        />
-
-        <TextInput
-          placeholder="password"
-          autoCapitalize="none"
-          style={styles.textInput}
-          onChangeText={password => this.setState({ password })}
-          value={password}
-          name="password"
-        />
-      <View style = { styles.buttons }>
-            <Button
-              onPress={this.onPressLearnMore}
-              title="Learn More"
-              color="#841584"
-              accessibilityLabel="Learn more about this purple button" />
-
-            <Button
-              onPress={this.onPressLearnMore}
-              title="Learn More"
-              color="#841584"
-              accessibilityLabel="Learn more about this purple button"
-            />
-      </View>
+    const { showPass, press } = this.state;
+    return (
+      <ImageBackground
+        source={require('../assets/bg_signup.jpg')}
+        style={styles.background}>
+        <View style = {styles.logoContainer}>
+          <Image source={require('../assets/FHA_icon.png')}  
+           style = {styles.logo}/>
         </View>
-     </View>
-     
-    
-)
+
+          <View>
+                <AntDesign
+                  name="user"
+                  size={32}
+                  color="white"
+                  style={styles.inputIcons}
+                />
+                <TextInput
+                  placeholder={'Username'}
+                  placeholderTextColor={'white'}
+                  underlineColorAndroid="transparent"
+                  style={styles.input}
+                  onChangeText = {(email) => this.setState(({ email }))}
+                />
+          </View>
+          <View>
+            <Ionicons
+              name="ios-lock"
+              size={32}
+              color={'white'}
+              style={styles.inputIcons}
+            />
+            <TextInput
+              placeholder={'password'}
+              placeholderTextColor={'white'}
+              underlineColorAndroid="transparent"
+              secureTextEntry={showPass}
+              style={styles.input}
+               onChangeText = {password => this.setState(({ password  }))}
+            />
+
+            <TouchableOpacity onPress={this.showPassword} 
+            style={styles.btn_eye}>
+              <Feather
+                name={!press ? 'eye' : 'eye-off'}
+                size={32}
+                color="white"
+               
+              />
+            </TouchableOpacity>
+              <View style  = { styles.buttons }>
+                <TouchableOpacity style={styles.btnLogin} onPress = { this.handleSubimit}>
+                    <Text style={styles.text}> Login </Text> 
+              </TouchableOpacity>
+                <TouchableOpacity style={styles.btnLogin}>
+                  <Text style={styles.text}> SignUp </Text>
+                </TouchableOpacity>
+              </View>
+        </View>
+      </ImageBackground>
+    );
   }
 }
 
-// const styles = StyleSheet.create({
-//    container:{
-//     flex:1,
-//     width:'100%',
-//     heigth:'100%'
-//   },
-  // icon:{
-  //     marginTop:'50px'
-  // }
-// })
-
 const styles = StyleSheet.create({
-  container:{
-  
-    flex:1,
-    width:'100%',
-    heigth:'100%'
-  
-  },
-  form :{
+  background: {
     flex: 1,
-    flexDirection: 'column',
+    width: null,
+    heigth: null,
     justifyContent: 'center',
     alignItems: 'center',
   },
-   textInput: {
-    height: 40,
-    width: '90%',
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginTop: 8
+  input: {
+    width: WIDTH - 55,
+    height: 45,
+    borderRadius: 5,
+    fontSize: 16,
+    paddingLeft: 45,
+    backgroundColor: 'rgba(0,0,0,0.35)',
+    color: 'rgba(255,255,255,0.7)',
+    marginHorizontal: 25,
+    marginBottom: 15,
   },
-  buttons : {
-    flexDirection: 'row',
+  btnLogin: {
+    width: 95,
+    height: 45,
+    borderRadius: 5,
+    backgroundColor: 'white',
     justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 4,
-    borderWidth: 0.5,
-    borderColor: 'red',
-    height:'500px',
-    width:"500px"
-  
+    marginTop: 20,
+    marginLeft: 25,
+  },
+  text: {
+    color: 'red',
+    fontSize: 15,
+    textAlign: 'center',
+  },
+  inputIcons: {
+    position: 'absolute',
+    top: 8,
+    left: 32,
+  },
+  btn_eye: {
+    top: 0,
+    position: 'absolute',
+    right: 52,
+    
+  },
+ 
+  logoContainer:{
+   alignItems:"center"
+  },
+  logo:{
+     width:250,
+     height:120
+  },
+  buttons:{
+    flexDirection:'row',
+    marginLeft:20
   }
-
 });
