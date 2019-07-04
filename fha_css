@@ -1,0 +1,32 @@
+splash 
+ loader_container:{
+   top:"25%",
+   left:"40%",
+   height:90,
+   width:90
+ }
+ 
+ after the splash
+   topText:{
+       color:	"#7575a3",
+       fontSize:32
+     },
+     bottomText:{
+         color:	"#7575a3",
+         fontSize:25
+     },
+     text_container:{
+        flex:3,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom:200
+     },
+     button :{
+       height:80,
+       width:200
+     },
+     login_button :{
+       backgroundColor:"red",
+       borderRadius:5
+     }
